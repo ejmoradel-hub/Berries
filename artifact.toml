@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Chinook Breeze Berries"
+version = "1.0.0"
+id = "artifacts/chinook-breeze-berries"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24903
+
+[services.development]
+run = "pnpm --filter @workspace/chinook-breeze-berries run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/chinook-breeze-berries", "run", "build" ]
+publicDir = "artifacts/chinook-breeze-berries/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24903"
+BASE_PATH = "/"
